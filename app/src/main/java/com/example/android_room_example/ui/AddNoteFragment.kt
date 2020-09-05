@@ -2,6 +2,7 @@ package com.example.android_room_example.ui
 
 import android.os.AsyncTask
 import android.os.Bundle
+import android.renderscript.Script
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,10 @@ import com.example.android_room_example.R
 import com.example.android_room_example.database.Note
 import com.example.android_room_example.database.NoteDatabase
 import kotlinx.android.synthetic.main.fragment_add_note.*
+import kotlinx.coroutines.launch
+import com.example.android_room_example.ui.toast
 
-class AddNoteFragment : Fragment() {
+class AddNoteFragment : BaseFragment() {
 
 
     override fun onCreateView(
@@ -43,24 +46,29 @@ class AddNoteFragment : Fragment() {
             }
 
             val note = Note(noteTitle,noteNote)
-            saveNote(note)
+            launch {
+                context?.let { it1 -> NoteDatabase(it1).getNoteDao().addNote(note)
+                    Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
+                }
+            }
+//            saveNote(note)
 
 
         }
     }
-    private fun saveNote(note : Note)
-    {
-        class SaveNote : AsyncTask<Void ,Void ,Void  >(){
-            override fun doInBackground(vararg params: Void?): Void? {
-                NoteDatabase(activity!!).getNoteDao().addNote(note)
-                return null
-            }
-
-            override fun onPostExecute(result: Void?) {
-                super.onPostExecute(result)
-                Toast.makeText(activity,"noted sir",Toast.LENGTH_SHORT).show()
-            }
-        }
-        SaveNote().execute()
-    }
+//    private fun saveNote(note : Note)
+//    {
+//        class SaveNote : AsyncTask<Void ,Void ,Void  >(){
+//            override fun doInBackground(vararg params: Void?): Void? {
+//                NoteDatabase(activity!!).getNoteDao().addNote(note)
+//                return null
+//            }
+//
+//            override fun onPostExecute(result: Void?) {
+//                super.onPostExecute(result)
+//                Toast.makeText(activity,"noted sir",Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//        SaveNote().execute()
+//    }
 }

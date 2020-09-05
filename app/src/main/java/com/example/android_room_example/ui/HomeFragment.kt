@@ -11,7 +11,7 @@ import com.example.android_room_example.R
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
 
     override fun onCreateView(
