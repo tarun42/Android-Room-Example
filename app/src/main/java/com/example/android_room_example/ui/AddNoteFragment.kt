@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
 import com.example.android_room_example.R
 import com.example.android_room_example.database.Note
 import com.example.android_room_example.database.NoteDatabase
@@ -49,8 +50,11 @@ class AddNoteFragment : BaseFragment() {
             launch {
                 context?.let { it1 -> NoteDatabase(it1).getNoteDao().addNote(note)
                     Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
+                    val action=AddNoteFragmentDirections.ActionSaveNote()
+                    Navigation.findNavController(it).navigate(action)
                 }
             }
+
 //            saveNote(note)
 
 
