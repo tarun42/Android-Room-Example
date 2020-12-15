@@ -22,7 +22,6 @@ int a;int b;
         return NavigationUI.navigateUp(
 
             Navigation.findNavController(this,R.id.fragment),null
-
         )
     }
 }
