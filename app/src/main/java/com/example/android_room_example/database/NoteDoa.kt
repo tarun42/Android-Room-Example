@@ -6,6 +6,7 @@ import androidx.room.Query
 
 @Dao
 interface NoteDoa {
+
     @Insert
     suspend fun addNote(note : Note)
 
@@ -14,4 +15,5 @@ interface NoteDoa {
 
     @Insert
     suspend fun addMultieNote(vararg note: Note)
+
 }
